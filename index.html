@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Playground</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f3f3f3;
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+    }
+    h1 {
+        margin: 0;
+    }
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
+    #editor {
+        width: 30%;
+        height: 60vh;
+        padding: 10px;
+        margin-right: 20px;
+        border: 2px solid #555;
+        background-color: #fff;
+        font-size: 16px;
+        font-family: monospace;
+    }
+    #output {
+        width: 50%;
+        height: 60vh;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow-y: scroll;
+    }
+    button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        display: block;
+        margin: 20px auto;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+    button.save {
+        background: #28a745;
+    }
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>HTML Playground</h1>
+</header>
+<main>
+    <textarea id="editor" placeholder="Write your HTML code here"></textarea>
+    <div id="output"></div>
+</main>
+<button onclick="runCode()">Run</button>
+<button class="save" onclick="downloadCode()">Save as HTML</button>
+<footer>
+</footer>
+
+<script>
+    function runCode() {
+        var htmlCode = document.getElementById('editor').value;
+        document.getElementById('output').innerHTML = htmlCode;
+    }
+
+    function downloadCode() {
+        var htmlCode = document.getElementById('editor').value;
+        var blob = new Blob([htmlCode], {type: "text/html"});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'code.html';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+    }
+</script>
+</body>
+</html>
